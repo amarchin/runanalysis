@@ -1,0 +1,201 @@
+---
+title: "CodeBook"
+author: "Andrea Marchini"
+date: "26/10/2014"
+output: html_document
+---
+
+Raw data description
+------------
+
+The data data belong to the **Human Activity Recognition Using Smartphones Dataset** [[1](#har-smart)] (the raw version can be downloaded at [[2](#uci-har)]). 
+
+The raw data set was built from experiments carried out with a group of 30 volunteers within an age bracket of 19-48 years. Each person performed six activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) wearing a smartphone (Samsung Galaxy S II) on the waist. Using its embedded accelerometer and gyroscope, 3-axial linear acceleration and 3-axial angular velocity have been captured at a constant rate of 50Hz. The experiments have been video-recorded to label the data manually. A vector of features was obtained by calculating variables from the time and frequency domain.
+
+The features come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ).
+Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag).
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals).
+These signals were used to estimate variables of the feature vector for each pattern:
+'-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+
+The set of variables that were estimated from these signals are: 
+
+*  mean(): Mean value
+*  std(): Standard deviation
+*  mad(): Median absolute deviation 
+*  max(): Largest value in array
+*  min(): Smallest value in array
+*  sma(): Signal magnitude area
+*  energy(): Energy measure. Sum of the squares divided by the number of values. 
+*  iqr(): Interquartile range 
+*  entropy(): Signal entropy
+*  arCoeff(): Autoregression coefficients with Burg order equal to 4
+*  correlation(): Correlation coefficient between two signals
+*  maxInds(): Index of the frequency component with largest magnitude
+*  meanFreq(): Weighted average of the frequency components to obtain a mean frequency
+*  skewness(): Skewness of the frequency domain signal 
+*  kurtosis(): Kurtosis of the frequency domain signal 
+*  bandsEnergy(): Energy of a frequency interval within the 64 bins of the FFT
+   of each window.
+*  angle(): Angle between some vectors.
+
+No unit of measures is reported as all features were normalized and bounded
+within [-1,1].
+
+Tidy data
+---------
+
+The tidy data (in the run_analysis.txt file) are by obtained processing the raw data using the run_analysis.R script.
+
+Test and training data (X_train.txt, X_test.txt), subject IDs (subject_train.txt, subject_test.txt) and activity IDs (y_train.txt, y_test.txt) are merged in order to obtain a single data set. The variables are labelled using the names assigned in raw data (features.txt) and the activity IDs are substituted with the activity description through a mapping algorithm (activity_labels.txt.). Moreover the descriptions have been changed to obtain better descriptive variables: the underscores have been deleted and the names have been modified in a lower case version.
+
+Then it is extracted a sub set from the merged data set selecting only the values of estimated mean (variables with labels that contain *mean*) and standard deviation (variables with labels that contain *std*). The labels given from the original collectors were changed: to obtain valid R names without parentheses, dashes and commas. A CamelCase notation for the labels has been used to avoid very long names and in order to better divide the strings that form the label itself.
+
+From the intermediate data set is created a final tidy data set.
+It is organized in a table with 180 rows (+1 for column names in the run_analysis.txt file) and 68 columns. In the first columns are reported the subject IDs while in the second the activity descriptions. Columns from 3 to 68 present the mean (*Mean* in the column names) and standard deviation (*Std* in the column names) for the measurements selected from the raw data. 
+
+The column names are:
+
+1-Subject
+
+2-Activity 
+
+3-tBodyAccMeanX 
+
+4-tBodyAccMeanY 
+
+5-tBodyAccMeanZ 
+
+6-tGravityAccMeanX 
+
+7-tGravityAccMeanY 
+
+8-tGravityAccMeanZ 
+
+9-tBodyAccJerkMeanX 
+
+10-tBodyAccJerkMeanY
+
+11-tBodyAccJerkMeanZ 
+
+12-tBodyGyroMeanX 
+
+13-tBodyGyroMeanY 
+
+14-tBodyGyroMeanZ 
+
+15-tBodyGyroJerkMeanX 
+
+16-tBodyGyroJerkMeanY 
+
+17-tBodyGyroJerkMeanZ 
+
+18-tBodyAccMagMean 
+
+19-tGravityAccMagMean 
+
+20-tBodyAccJerkMagMean 
+
+21-tBodyGyroMagMean 
+
+22-tBodyGyroJerkMagMean 
+
+23-fBodyAccMeanX
+
+24-fBodyAccMeanY
+
+25-fBodyAccMeanZ
+
+26-fBodyAccJerkMeanX 
+
+27-fBodyAccJerkMeanY 
+
+28-fBodyAccJerkMeanZ 
+
+29-fBodyGyroMeanX 
+
+30-fBodyGyroMeanY 
+
+31-fBodyGyroMeanZ 
+
+32-fBodyAccMagMean 
+
+33-fBodyBodyAccJerkMagMean 
+
+34-fBodyBodyGyroMagMean 
+
+35-fBodyBodyGyroJerkMagMean 
+
+36-tBodyAccStdX 
+
+37-tBodyAccStdY
+
+38-tBodyAccStdZ
+
+39-tGravityAccStdX
+
+40-tGravityAccStdY
+
+41-tGravityAccStdZ
+
+42-tBodyAccJerkStdX 
+
+43-tBodyAccJerkStdY 
+
+44-tBodyAccJerkStdZ 
+
+45-tBodyGyroStdX 
+
+46-tBodyGyroStdY 
+
+47-tBodyGyroStdZ 
+
+48-tBodyGyroJerkStdX 
+
+49-tBodyGyroJerkStdY 
+
+50-tBodyGyroJerkStdZ 
+
+51-tBodyAccMagStd 
+
+52-tGravityAccMagStd 
+
+53-tBodyAccJerkMagStd 
+
+54-tBodyGyroMagStd 
+
+55-tBodyGyroJerkMagStd 
+
+56-fBodyAccStdX 
+
+57-fBodyAccStdY 
+
+58-fBodyAccStdZ 
+
+59-fBodyAccJerkStdX 
+
+60-fBodyAccJerkStdY 
+
+61-fBodyAccJerkStdZ
+
+62-fBodyGyroStdX
+
+63-fBodyGyroStdY
+
+64-fBodyGyroStdZ
+
+65-fBodyAccMagStd
+
+66-fBodyBodyAccJerkMagStd
+
+67-fBodyBodyGyroMagStd 
+
+68-fBodyBodyGyroJerkMagStd
+
+References
+----------
+1. <a name="har-smart"/>Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz.
+   *Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine*.
+   International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+2.  <a name="uci-har"/>Human Activity Recognition Using Smartphones Data Set.
+    URL: <http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones>. 
